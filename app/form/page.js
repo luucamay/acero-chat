@@ -2,8 +2,16 @@
 
 import styles from './page.module.css'
 export default function PageWithJSbasedForm() {
+
+  const fetchData = async (event) => {
+    event.preventDefault()
+    const response = await fetch('/api/form')
+    const data = await response.json();
+    console.log(data);
+  }
+
   // Handles the submit event on form submit.
-  const handleSubmit = async (event) => {
+  const saveData = async (event) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
 
@@ -38,13 +46,13 @@ export default function PageWithJSbasedForm() {
     // Get the response data from server as JSON.
     // If server returns the name submitted, that means the form works.
     const result = await response.json()
-    alert(`Your message has been sent!`)
+    console.log(result)
   }
 
   return (
     // We pass the event to the handleSubmit() function on submit.
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={saveData}>
       <label htmlFor="action">Action:</label>
       <select name="action" id="action">
         <option value="write">Write Message</option>
