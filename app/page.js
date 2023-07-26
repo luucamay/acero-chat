@@ -1,15 +1,18 @@
 import styles from './page.module.css'
+import { getMessagesData } from '../lib/load-chats';
 
 export default function Home() {
+  const allMessages = getMessagesData();
+  console.log(allMessages)
+
   return (
-    <main className={styles.main}>
-      <section className={styles.author}>Assistant: </section>
-      <section className={styles.messages}>is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the s standard dummy text ever since the 1500s, when an unknown printer took a
-        galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-        but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</section>
-    </main>
+    <ul className={styles.main}>
+      {allMessages.map(({ id, role, message }) => (
+        <li className={styles.card} key={id}>
+          <p className={styles.author}>{role}</p>
+          <p className={styles.message}>{message}</p>
+        </li>
+      ))}
+    </ul>
   )
 }

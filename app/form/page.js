@@ -3,13 +3,6 @@
 import styles from './page.module.css'
 export default function PageWithJSbasedForm() {
 
-  const fetchData = async (event) => {
-    event.preventDefault()
-    const response = await fetch('/api/form')
-    const data = await response.json();
-    console.log(data);
-  }
-
   // Handles the submit event on form submit.
   const saveData = async (event) => {
     // Stop the form from submitting and refreshing the page.
